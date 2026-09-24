@@ -1,0 +1,40 @@
+<view class="cart" wx:if="{{items.length}}">
+  <view class="cart-list">
+    <view class="c-item" wx:for="{{items}}" wx:key="key">
+      <view class="ck {{item.selected ? 'ck-on' : ''}}" catchtap="toggleSel" data-key="{{item.key}}"></view>
+      <image class="c-img" src="{{item.cover}}" mode="aspectFill" />
+      <view class="c-info">
+        <view class="c-name">{{item.name}}</view>
+        <view class="c-color" wx:if="{{item.color}}">{{item.color}}</view>
+        <view class="c-bottom">
+          <view class="price"><text class="rmb">¥</text>{{item.price}}</view>
+          <view class="stepper">
+            <view class="step-btn" hover-class="hover" catchtap="onMinus" data-key="{{item.key}}">−</view>
+            <input class="step-input" type="number" value="{{item.quantity}}" bindblur="onQty" data-key="{{item.key}}" />
+            <view class="step-btn" hover-class="hover" catchtap="onPlus" data-key="{{item.key}}">＋</view>
+          </view>
+        </view>
+      </view>
+      <view class="c-del" catchtap="onDelete" data-key="{{item.key}}">✕</view>
+    </view>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="settle-bar">
+    <view class="ck {{allSelected ? 'ck-on' : ''}}" bindtap="toggleAll"></view>
+    <text class="all-label">全选</text>
+    <view class="settle-total">
+      <text>合计：</text>
+      <text class="price settle-price"><text class="rmb">¥</text>{{totalText}}</text>
+    </view>
+    <view class="settle-btn {{selectedCount ? '' : 'settle-disabled'}}" hover-class="hover" bindtap="goCheckout">
+      去结算{{selectedCount ? '(' + selectedCount + ')' : ''}}
+    </view>
+  </view>
+</view>
+
+<view class="empty-wrap" wx:else>
+  <view class="empty-icon">🛒</view>
+  <view class="empty-text">购物车还是空的</view>
+  <view class="btn-plain empty-btn" hover-class="hover" bindtap="goShopping">去逛逛</view>
+</view>

@@ -1,0 +1,58 @@
+<view class="page">
+  <!-- Banner 轮播 -->
+  <swiper class="banner" indicator-dots autoplay circular interval="4000" duration="500">
+    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-link="{{item.link}}">
+      <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 服务承诺 -->
+  <view class="promise">
+    <text class="promise-item">厂家直供</text>
+    <text class="promise-item">支持定制</text>
+    <text class="promise-item">现货批发</text>
+    <text class="promise-item">免费打样</text>
+  </view>
+
+  <!-- 产品分类 -->
+  <view class="section-head">
+    <text class="title">产品分类</text>
+  </view>
+  <view class="cate-grid">
+    <view class="cate-item" wx:for="{{categories}}" wx:key="id" hover-class="hover" bindtap="goCategory" data-id="{{item.id}}">
+      <image class="cate-img" src="{{item.cover}}" mode="aspectFill" />
+      <text class="cate-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 热销推荐 -->
+  <view class="section-head">
+    <text class="title">热销推荐</text>
+    <text class="more" bindtap="goMore" data-type="hot">更多 ›</text>
+  </view>
+  <view class="grid">
+    <view class="grid-item" wx:for="{{hot}}" wx:key="id">
+      <product-card product="{{item}}" />
+    </view>
+  </view>
+
+  <!-- 新品上架 -->
+  <view class="section-head">
+    <text class="title">新品上架</text>
+    <text class="more" bindtap="goMore" data-type="new">更多 ›</text>
+  </view>
+  <scroll-view class="fresh-scroll" scroll-x enable-flex>
+    <view class="fresh-item" wx:for="{{fresh}}" wx:key="id" hover-class="hover" bindtap="goDetail" data-id="{{item.id}}">
+      <image class="fresh-img" src="{{item.cover}}" mode="aspectFill" />
+      <text class="fresh-name">{{item.name}}</text>
+      <text class="price fresh-price"><text class="rmb">¥</text>{{item.priceMin}} 起</text>
+    </view>
+  </scroll-view>
+
+  <!-- 公司简介 -->
+  <view class="card about-card">
+    <view class="about-title">{{config.brand}}</view>
+    <text class="about-text">{{intro}}</text>
+    <view class="about-link" hover-class="hover" bindtap="goAbout">了解我们 ›</view>
+  </view>
+</view>

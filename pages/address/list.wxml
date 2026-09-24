@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="addr card {{selectedId === item.id ? 'addr-current' : ''}}" wx:for="{{list}}" wx:key="id" hover-class="hover" bindtap="onTap" data-id="{{item.id}}">
+    <view class="addr-top">
+      <text class="addr-name">{{item.name}}</text>
+      <text class="addr-phone">{{item.phone}}</text>
+      <text class="addr-default" wx:if="{{item.isDefault}}">默认</text>
+    </view>
+    <view class="addr-detail">{{item.region}} {{item.detail}}</view>
+    <view class="addr-edit" catchtap="goEdit" data-id="{{item.id}}">编辑 ›</view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length}}">还没有收货地址</view>
+
+  <view class="addr-add-wrap">
+    <button class="btn-primary addr-add" hover-class="hover" bindtap="goAdd">＋ 新增收货地址</button>
+    <view class="addr-tip" wx:if="{{mode === 'select'}}">点击地址即可选中并返回</view>
+  </view>
+</view>

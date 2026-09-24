@@ -1,0 +1,115 @@
+.hero {
+  position: relative;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+
+.hero-img {
+  width: 100%;
+  height: 320rpx;
+  display: block;
+}
+
+.hero-text {
+  position: absolute;
+  left: 40rpx;
+  bottom: 40rpx;
+  color: #fff;
+}
+
+.hero-brand {
+  font-size: 40rpx;
+  font-weight: 700;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.hero-slogan {
+  font-size: 24rpx;
+  opacity: 0.92;
+  margin-top: 6rpx;
+}
+
+.sec-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.intro {
+  font-size: 26rpx;
+  color: #6b655b;
+}
+
+.stats {
+  display: flex;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #b9432f;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #8a857c;
+  margin-top: 4rpx;
+}
+
+.adv {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+}
+
+.adv-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.adv-body {
+  flex: 1;
+}
+
+.adv-title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.adv-desc {
+  font-size: 24rpx;
+  color: #8a857c;
+  margin-top: 2rpx;
+}
+
+.ci-row {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 0;
+  font-size: 26rpx;
+}
+
+.ci-icon {
+  margin-right: 16rpx;
+}
+
+.ci-label {
+  width: 100rpx;
+  color: #8a857c;
+  flex-shrink: 0;
+}
+
+.ci-value {
+  flex: 1;
+  color: #33302b;
+}
+
+.contact-btn {
+  margin-top: 24rpx;
+}

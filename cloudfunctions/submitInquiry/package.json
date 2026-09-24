@@ -1,0 +1,9 @@
+{
+  "name": "submitInquiry",
+  "version": "1.0.0",
+  "description": "询盘提交：校验并写入 inquiries 集合",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

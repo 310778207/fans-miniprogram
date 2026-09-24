@@ -1,0 +1,48 @@
+.pcard {
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(80, 60, 40, 0.05);
+}
+
+.cover {
+  width: 100%;
+  height: 330rpx;
+  background: #f3ead9;
+  display: block;
+}
+
+.info {
+  padding: 16rpx 20rpx 20rpx;
+}
+
+.name {
+  font-size: 26rpx;
+  color: #33302b;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 74rpx;
+}
+
+.price {
+  margin-top: 10rpx;
+  font-size: 32rpx;
+}
+
+.price .range {
+  font-size: 28rpx;
+}
+
+.meta {
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sales {
+  font-size: 22rpx;
+  color: #8a857c;
+}

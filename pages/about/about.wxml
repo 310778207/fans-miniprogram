@@ -1,0 +1,65 @@
+<view class="page">
+  <!-- 品牌头图 -->
+  <view class="hero">
+    <image class="hero-img" src="/images/banner2.png" mode="aspectFill" />
+    <view class="hero-text">
+      <view class="hero-brand">{{config.brand}}</view>
+      <view class="hero-slogan">{{config.slogan}}</view>
+    </view>
+  </view>
+
+  <!-- 简介 -->
+  <view class="card">
+    <view class="sec-title">公司简介</view>
+    <text class="intro">{{config.intro}}</text>
+  </view>
+
+  <!-- 实力数据 -->
+  <view class="card">
+    <view class="sec-title">实力数据</view>
+    <view class="stats">
+      <view class="stat" wx:for="{{stats}}" wx:key="label">
+        <view class="stat-num">{{item.num}}</view>
+        <view class="stat-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我们的优势 -->
+  <view class="card">
+    <view class="sec-title">我们的优势</view>
+    <view class="adv" wx:for="{{advantages}}" wx:key="title">
+      <text class="adv-icon">{{item.icon}}</text>
+      <view class="adv-body">
+        <view class="adv-title">{{item.title}}</view>
+        <view class="adv-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系我们 -->
+  <view class="card">
+    <view class="sec-title">联系我们</view>
+    <view class="ci-row" hover-class="hover" bindtap="callPhone">
+      <text class="ci-icon">📞</text>
+      <text class="ci-label">电话</text>
+      <text class="ci-value">{{config.phone}}</text>
+    </view>
+    <view class="ci-row" hover-class="hover" bindtap="copyWechat">
+      <text class="ci-icon">👥</text>
+      <text class="ci-label">微信</text>
+      <text class="ci-value">{{config.wechatId}}（点击复制）</text>
+    </view>
+    <view class="ci-row" hover-class="hover" bindtap="copyEmail">
+      <text class="ci-icon">✉️</text>
+      <text class="ci-label">邮箱</text>
+      <text class="ci-value">{{config.email}}</text>
+    </view>
+    <view class="ci-row">
+      <text class="ci-icon">📍</text>
+      <text class="ci-label">地址</text>
+      <text class="ci-value">{{config.address}}</text>
+    </view>
+    <button class="btn-primary contact-btn" open-type="contact">在线客服咨询</button>
+  </view>
+</view>

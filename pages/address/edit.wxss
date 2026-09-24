@@ -1,0 +1,51 @@
+.field {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #f4efe7;
+  padding: 24rpx 0;
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.field-label {
+  width: 190rpx;
+  font-size: 27rpx;
+  color: #5c544a;
+  flex-shrink: 0;
+}
+
+.req {
+  color: #b9432f;
+}
+
+.field-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.placeholder {
+  color: #b8b2a8;
+}
+
+.field-area {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.field-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 28rpx;
+}
+
+.save-btn {
+  margin-top: 40rpx;
+}
+
+.del-btn {
+  margin-top: 24rpx;
+  color: #8a857c;
+  border-color: #d5cec2;
+}

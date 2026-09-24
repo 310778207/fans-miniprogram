@@ -1,0 +1,55 @@
+<view class="page" wx:if="{{order}}">
+  <!-- 状态横幅 -->
+  <view class="od-banner st-bg-{{order.status}}">
+    <view class="od-status">{{order.statusLabel}}</view>
+    <view class="od-status-sub">{{statusTip}}</view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="card">
+    <view class="od-addr">
+      <text class="od-addr-icon">📍</text>
+      <view class="od-addr-body">
+        <view class="od-addr-top">
+          <text class="od-addr-name">{{order.address.name}}</text>
+          <text class="od-addr-phone">{{order.address.phone}}</text>
+        </view>
+        <view class="od-addr-detail">{{order.address.region}} {{order.address.detail}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品 -->
+  <view class="card">
+    <view class="od-item" wx:for="{{order.items}}" wx:key="index">
+      <image class="od-img" src="{{item.cover}}" mode="aspectFill" />
+      <view class="od-info">
+        <view class="od-name">{{item.name}}</view>
+        <view class="od-sku" wx:if="{{item.color}}">{{item.color}}</view>
+        <view class="od-row">
+          <view class="price"><text class="rmb">¥</text>{{item.price}}</view>
+          <text class="od-qty">×{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="od-total">合计：<text class="price"><text class="rmb">¥</text>{{order.totalText}}</text>（含运费 ¥{{order.shippingText}}）</view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="card">
+    <view class="od-meta"><text class="od-key">订单编号</text><text class="od-val" bindtap="copyNo">{{order.id}} 复制</text></view>
+    <view class="od-meta" wx:if="{{order.remark}}"><text class="od-key">订单留言</text><text class="od-val">{{order.remark}}</text></view>
+    <view class="od-meta"><text class="od-key">创建时间</text><text class="od-val">{{order.timeText}}</text></view>
+    <view class="od-meta" wx:if="{{order.paidText}}"><text class="od-key">付款时间</text><text class="od-val">{{order.paidText}}</text></view>
+    <view class="od-meta" wx:if="{{order.shippedText}}"><text class="od-key">发货时间</text><text class="od-val">{{order.shippedText}}</text></view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="od-actions card" wx:if="{{canPay || canCancel || canReceive || canMockShip}}">
+    <view class="o-btn" wx:if="{{canCancel}}" bindtap="onCancel">取消订单</view>
+    <view class="o-btn" wx:if="{{canMockShip}}" bindtap="onMockShip">模拟发货</view>
+    <view class="o-btn o-btn-main" wx:if="{{canReceive}}" bindtap="onReceive">确认收货</view>
+    <button class="o-btn o-btn-main od-pay-btn" wx:if="{{canPay}}" loading="{{paying}}" bindtap="onPay">立即支付</button>
+  </view>
+  <view class="od-tip" wx:if="{{canMockShip}}">演示模式：模拟发货后可体验「确认收货」流程</view>
+</view>

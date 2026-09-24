@@ -1,0 +1,30 @@
+<view class="cat-page">
+  <!-- 搜索框：跳转到列表页搜索 -->
+  <view class="search-bar" bindtap="goSearch">
+    <text class="search-icon">🔍</text>
+    <text class="search-placeholder">搜索产品名称 / 关键词</text>
+  </view>
+
+  <view class="cat-body">
+    <!-- 左侧分类 -->
+    <scroll-view class="side" scroll-y>
+      <view
+        class="side-item {{activeId === item.id ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="id"
+        bindtap="onSideTap"
+        data-id="{{item.id}}"
+      >{{item.name}}</view>
+    </scroll-view>
+
+    <!-- 右侧产品 -->
+    <scroll-view class="main" scroll-y>
+      <view class="grid" wx:if="{{products.length}}">
+        <view class="grid-item" wx:for="{{products}}" wx:key="id">
+          <product-card product="{{item}}" />
+        </view>
+      </view>
+      <view class="empty" wx:else>该分类暂无产品</view>
+    </scroll-view>
+  </view>
+</view>

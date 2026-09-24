@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/list/list",
+    "pages/detail/detail",
+    "pages/contact/contact",
+    "pages/about/about",
+    "pages/admin/admin",
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "pages/checkout/checkout",
+    "pages/orders/orders",
+    "pages/order-detail/order-detail",
+    "pages/address/list",
+    "pages/address/edit"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#B9432F",
+    "navigationBarTitleText": "匠心扇坊",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F7F4EF",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#99948C",
+    "selectedColor": "#B9432F",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab/home-gray.png",
+        "selectedIconPath": "images/tab/home-red.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "产品",
+        "iconPath": "images/tab/category-gray.png",
+        "selectedIconPath": "images/tab/category-red.png"
+      },
+      {
+        "pagePath": "pages/contact/contact",
+        "text": "询盘",
+        "iconPath": "images/tab/inquiry-gray.png",
+        "selectedIconPath": "images/tab/inquiry-red.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/tab/cart-gray.png",
+        "selectedIconPath": "images/tab/cart-red.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab/about-gray.png",
+        "selectedIconPath": "images/tab/about-red.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

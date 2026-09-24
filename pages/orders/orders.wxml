@@ -1,0 +1,40 @@
+<view class="orders">
+  <view class="tabs">
+    <view
+      class="tab {{filter === item.key ? 'tab-active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      bindtap="onFilter"
+      data-key="{{item.key}}"
+    >{{item.label}}</view>
+  </view>
+
+  <view class="list">
+    <view class="order card" wx:for="{{list}}" wx:key="id" hover-class="hover" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="o-head">
+        <text class="o-no">订单号 {{item.id}}</text>
+        <text class="o-status st-{{item.status}}">{{item.statusLabel}}</text>
+      </view>
+      <view class="o-item" wx:for="{{item.items}}" wx:for-item="g" wx:key="index">
+        <image class="o-img" src="{{g.cover}}" mode="aspectFill" />
+        <view class="o-info">
+          <view class="o-name">{{g.name}}</view>
+          <view class="o-sku" wx:if="{{g.color}}">{{g.color}}</view>
+        </view>
+        <view class="o-right">
+          <view class="price"><text class="rmb">¥</text>{{g.price}}</view>
+          <text class="o-qty">×{{g.quantity}}</text>
+        </view>
+      </view>
+      <view class="o-foot">
+        <text class="o-total">共{{item.totalQty}}件 合计：<text class="price"><text class="rmb">¥</text>{{item.totalText}}</text></text>
+        <view class="o-actions">
+          <view class="o-btn" wx:if="{{item.status === 'pending_payment'}}" catchtap="onCancel" data-id="{{item.id}}">取消订单</view>
+          <view class="o-btn o-btn-main" wx:if="{{item.status === 'pending_payment'}}" catchtap="onPay" data-id="{{item.id}}">去支付</view>
+          <view class="o-btn o-btn-main" wx:if="{{item.status === 'shipped'}}" catchtap="onReceive" data-id="{{item.id}}">确认收货</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!list.length && !loading}}">暂无相关订单</view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "adminInquiries",
+  "version": "1.0.0",
+  "description": "商家询盘管理：列表查询与跟进状态更新",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,149 @@
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10rpx;
+}
+
+.cc-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 0;
+  background: transparent;
+  border: none;
+  line-height: 1.4;
+  font-size: inherit;
+  margin: 0;
+}
+
+.cc-btn::after {
+  border: none;
+}
+
+.cc-icon {
+  font-size: 44rpx;
+}
+
+.cc-label {
+  font-size: 24rpx;
+  color: #33302b;
+  margin-top: 6rpx;
+}
+
+.cc-sub {
+  font-size: 20rpx;
+  color: #8a857c;
+}
+
+.form-title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.form-sub {
+  font-size: 22rpx;
+  color: #8a857c;
+  margin: 6rpx 0 20rpx;
+}
+
+.picked {
+  display: flex;
+  align-items: center;
+  background: rgba(185, 67, 47, 0.06);
+  border: 1rpx dashed rgba(185, 67, 47, 0.4);
+  border-radius: 10rpx;
+  padding: 12rpx 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.picked-tag {
+  font-size: 20rpx;
+  color: #fff;
+  background: #b9432f;
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.picked-name {
+  flex: 1;
+  font-size: 24rpx;
+  color: #5c544a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picked-clear {
+  color: #b8b2a8;
+  padding: 0 8rpx;
+  font-size: 24rpx;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #f4efe7;
+  padding: 20rpx 0;
+}
+
+.field-label {
+  width: 170rpx;
+  font-size: 26rpx;
+  color: #5c544a;
+  flex-shrink: 0;
+}
+
+.req {
+  color: #b9432f;
+}
+
+.field-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.field-area {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.field-textarea {
+  width: 100%;
+  min-height: 160rpx;
+  font-size: 28rpx;
+}
+
+.field-count {
+  align-self: flex-end;
+  font-size: 20rpx;
+  color: #b8b2a8;
+}
+
+.submit-btn {
+  margin-top: 30rpx;
+}
+
+.form-tip {
+  text-align: center;
+  font-size: 20rpx;
+  color: #b8b2a8;
+  margin-top: 16rpx;
+}
+
+.addr-card {
+  display: flex;
+  align-items: flex-start;
+}
+
+.addr-icon {
+  margin-right: 12rpx;
+}
+
+.addr-text {
+  flex: 1;
+  font-size: 25rpx;
+  color: #6b655b;
+}

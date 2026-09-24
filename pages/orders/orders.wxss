@@ -1,0 +1,156 @@
+page {
+  background: #f7f4ef;
+}
+
+.tabs {
+  display: flex;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0 2rpx 8rpx rgba(80, 60, 40, 0.05);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 27rpx;
+  color: #5c544a;
+  padding: 22rpx 0;
+  border-bottom: 4rpx solid transparent;
+}
+
+.tab-active {
+  color: #b9432f;
+  font-weight: 600;
+  border-bottom-color: #b9432f;
+}
+
+.list {
+  padding: 24rpx;
+}
+
+.order {
+  padding: 20rpx 24rpx;
+}
+
+.o-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid #f4efe7;
+}
+
+.o-no {
+  font-size: 22rpx;
+  color: #8a857c;
+}
+
+.o-status {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.st-pending_payment {
+  color: #b9432f;
+}
+
+.st-paid {
+  color: #c9a063;
+}
+
+.st-shipped {
+  color: #2e7d4f;
+}
+
+.st-completed {
+  color: #8a857c;
+}
+
+.st-cancelled {
+  color: #b8b2a8;
+}
+
+.o-item {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+}
+
+.o-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  background: #f3ead9;
+  flex-shrink: 0;
+}
+
+.o-info {
+  flex: 1;
+  margin: 0 16rpx;
+  min-width: 0;
+}
+
+.o-name {
+  font-size: 25rpx;
+  color: #33302b;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.o-sku {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #8e5b3c;
+  background: rgba(201, 160, 99, 0.14);
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  margin-top: 6rpx;
+}
+
+.o-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.o-qty {
+  display: block;
+  font-size: 22rpx;
+  color: #8a857c;
+  margin-top: 4rpx;
+}
+
+.o-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f4efe7;
+}
+
+.o-total {
+  font-size: 24rpx;
+  color: #5c544a;
+}
+
+.o-actions {
+  display: flex;
+}
+
+.o-btn {
+  font-size: 24rpx;
+  color: #5c544a;
+  border: 2rpx solid #d5cec2;
+  border-radius: 30rpx;
+  padding: 8rpx 24rpx;
+  margin-left: 14rpx;
+}
+
+.o-btn-main {
+  color: #fff;
+  background: #b9432f;
+  border-color: #b9432f;
+}

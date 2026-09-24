@@ -1,0 +1,27 @@
+<view class="page">
+  <view class="search-wrap">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索产品名称 / 关键词"
+        confirm-type="search"
+        focus="{{autoFocus}}"
+        bindinput="onInput"
+        bindconfirm="onSearch"
+      />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="onClear">✕</text>
+    </view>
+    <view class="search-btn" hover-class="hover" bindtap="onSearch">搜索</view>
+  </view>
+
+  <view class="result-tip" wx:if="{{tip}}">{{tip}}</view>
+
+  <view class="grid" wx:if="{{products.length}}">
+    <view class="grid-item" wx:for="{{products}}" wx:key="id">
+      <product-card product="{{item}}" />
+    </view>
+  </view>
+  <view class="empty" wx:else>没有找到相关产品，换个关键词试试</view>
+</view>

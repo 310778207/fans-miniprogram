@@ -1,0 +1,59 @@
+<view class="page ck-page">
+  <!-- 收货地址 -->
+  <view class="card addr-card" hover-class="hover" bindtap="chooseAddress">
+    <block wx:if="{{address}}">
+      <view class="ck-addr-top">
+        <text class="ck-addr-name">{{address.name}}</text>
+        <text class="ck-addr-phone">{{address.phone}}</text>
+      </view>
+      <view class="ck-addr-detail">{{address.region}} {{address.detail}}</view>
+    </block>
+    <view class="ck-addr-empty" wx:else>＋ 请选择收货地址</view>
+    <text class="ck-addr-arrow">›</text>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="card">
+    <view class="ck-item" wx:for="{{items}}" wx:key="index">
+      <image class="ck-img" src="{{item.cover}}" mode="aspectFill" />
+      <view class="ck-info">
+        <view class="ck-name">{{item.name}}</view>
+        <view class="ck-sku" wx:if="{{item.color}}">{{item.color}}</view>
+        <view class="ck-row">
+          <view class="price"><text class="rmb">¥</text>{{item.price}}</view>
+          <text class="ck-qty">×{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="field ck-remark">
+      <text class="field-label">订单留言</text>
+      <input class="field-input" placeholder="选填，如包装、发货要求" value="{{remark}}" bindinput="onRemark" />
+    </view>
+  </view>
+
+  <!-- 金额 -->
+  <view class="card">
+    <view class="ck-amount-row">
+      <text>商品金额</text>
+      <text>¥{{goodsText}}</text>
+    </view>
+    <view class="ck-amount-row">
+      <text>运费</text>
+      <text>包邮</text>
+    </view>
+    <view class="ck-amount-row ck-amount-total">
+      <text>应付总额</text>
+      <text class="price"><text class="rmb">¥</text>{{totalText}}</text>
+    </view>
+  </view>
+
+  <view class="ck-pay-tip" wx:if="{{isMockPay}}">当前为模拟支付模式（不真扣款），上线前在 config 中切换为云支付</view>
+
+  <!-- 提交栏 -->
+  <view class="ck-bar">
+    <view class="ck-bar-total">
+      合计：<text class="price ck-bar-price"><text class="rmb">¥</text>{{totalText}}</text>
+    </view>
+    <button class="btn-primary ck-submit" loading="{{submitting}}" bindtap="onSubmit">提交订单</button>
+  </view>
+</view>

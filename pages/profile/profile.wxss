@@ -1,0 +1,136 @@
+page {
+  background: #f7f4ef;
+}
+
+.pf-head {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #b9432f, #8e3222);
+  border-radius: 16rpx;
+  padding: 44rpx 36rpx;
+  margin-bottom: 24rpx;
+  color: #fff;
+}
+
+.pf-avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+  margin-right: 26rpx;
+}
+
+.pf-name {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.pf-slogan {
+  font-size: 24rpx;
+  opacity: 0.85;
+  margin-top: 6rpx;
+}
+
+.pf-sec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pf-sec-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.pf-sec-more {
+  font-size: 24rpx;
+  color: #8a857c;
+}
+
+.pf-odes {
+  display: flex;
+  margin-top: 26rpx;
+}
+
+.pf-ode {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.pf-ode-icon {
+  font-size: 44rpx;
+}
+
+.pf-ode-label {
+  font-size: 23rpx;
+  color: #5c544a;
+  margin-top: 8rpx;
+}
+
+.pf-ode-badge {
+  position: absolute;
+  top: -10rpx;
+  right: 22rpx;
+  min-width: 30rpx;
+  text-align: center;
+  background: #b9432f;
+  color: #fff;
+  font-size: 18rpx;
+  border-radius: 16rpx;
+  padding: 0 8rpx;
+  line-height: 30rpx;
+}
+
+.pf-menu {
+  padding: 6rpx 24rpx;
+}
+
+.pf-row {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid #f4efe7;
+  font-size: 28rpx;
+  background: transparent;
+  text-align: left;
+}
+
+.pf-row:last-child {
+  border-bottom: none;
+}
+
+.pf-btn {
+  width: 100%;
+  margin: 0;
+}
+
+.pf-btn::after {
+  border: none;
+}
+
+.pf-row-icon {
+  margin-right: 18rpx;
+}
+
+.pf-row-label {
+  flex: 1;
+  color: #33302b;
+}
+
+.pf-row-val {
+  font-size: 24rpx;
+  color: #8a857c;
+  margin-right: 8rpx;
+}
+
+.pf-row-arrow {
+  color: #c9c2b6;
+  font-size: 36rpx;
+}

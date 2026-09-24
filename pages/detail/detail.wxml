@@ -1,0 +1,101 @@
+<view class="detail" wx:if="{{product}}">
+  <!-- 图集 -->
+  <view class="gallery">
+    <swiper class="gallery-swiper" circular bindchange="onSwiperChange">
+      <swiper-item wx:for="{{product.gallery}}" wx:key="*this">
+        <image class="gallery-img" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-current="{{item}}" />
+      </swiper-item>
+    </swiper>
+    <view class="gallery-count">{{currentIndex + 1}}/{{product.gallery.length}}</view>
+  </view>
+
+  <view class="page">
+    <!-- 标题与价格 -->
+    <view class="card">
+      <view class="d-name">{{product.name}}</view>
+      <view class="d-price-row">
+        <view class="price d-price">
+          <text class="rmb">¥</text>{{product.priceMin}}<text wx:if="{{product.priceMax > product.priceMin}}"> - {{product.priceMax}}</text>
+          <text class="d-price-unit">/ 把</text>
+        </view>
+        <text class="d-sales">已售 {{product.sales}}</text>
+      </view>
+      <view class="d-tags">
+        <text class="tag">厂家直供</text>
+        <text class="tag">支持定制</text>
+        <text class="tag gold">免费打样</text>
+      </view>
+    </view>
+
+    <!-- 颜色 / 数量 -->
+    <view class="card">
+      <view class="d-label">颜色</view>
+      <view class="chips">
+        <view
+          class="chip {{selectedColor === item ? 'chip-active' : ''}}"
+          wx:for="{{product.colors}}"
+          wx:key="*this"
+          bindtap="onColorTap"
+          data-color="{{item}}"
+        >{{item}}</view>
+      </view>
+      <view class="d-label d-qty-label">数量</view>
+      <view class="stepper">
+        <view class="step-btn" hover-class="hover" bindtap="onQtyMinus">−</view>
+        <input class="step-input" type="number" value="{{quantity}}" bindblur="onQtyInput" />
+        <view class="step-btn" hover-class="hover" bindtap="onQtyPlus">＋</view>
+      </view>
+      <view class="d-min-tip">批发起订：{{minQtyTip}}</view>
+      <view class="wholesale-link" hover-class="hover" bindtap="goInquiry">批发采购要报价？去询盘 ›</view>
+    </view>
+
+    <!-- 规格参数 -->
+    <view class="card">
+      <view class="d-label">规格参数</view>
+      <view class="spec-row" wx:for="{{product.specs}}" wx:key="label">
+        <text class="spec-key">{{item.label}}</text>
+        <text class="spec-val">{{item.value}}</text>
+      </view>
+    </view>
+
+    <!-- 图文详情 -->
+    <view class="section-head"><text class="title">产品详情</text></view>
+    <view class="card">
+      <text class="d-desc">{{product.desc}}</text>
+      <image
+        class="d-img"
+        wx:for="{{product.gallery}}"
+        wx:key="*this"
+        src="{{item}}"
+        mode="widthFix"
+        lazy-load="{{true}}"
+      />
+    </view>
+
+    <!-- 猜你喜欢 -->
+    <view class="section-head"><text class="title">猜你喜欢</text></view>
+    <view class="grid" wx:if="{{related.length}}">
+      <view class="grid-item" wx:for="{{related}}" wx:key="id">
+        <product-card product="{{item}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <view class="ab-icon" hover-class="hover" bindtap="goHome">
+      <text class="ab-icon-emoji">🏠</text>
+      <text class="ab-icon-text">首页</text>
+    </view>
+    <button class="ab-icon ab-btn" open-type="contact" hover-class="hover">
+      <text class="ab-icon-emoji">💬</text>
+      <text class="ab-icon-text">客服</text>
+    </button>
+    <view class="ab-icon" hover-class="hover" bindtap="callPhone">
+      <text class="ab-icon-emoji">📞</text>
+      <text class="ab-icon-text">电话</text>
+    </view>
+    <view class="ab-cart" hover-class="hover" bindtap="addToCart">加入购物车</view>
+    <view class="ab-buy" hover-class="hover" bindtap="buyNow">立即购买</view>
+  </view>
+</view>

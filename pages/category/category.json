@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "全部产品",
+  "usingComponents": {
+    "product-card": "/components/product-card/index"
+  }
+}

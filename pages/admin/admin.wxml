@@ -1,0 +1,60 @@
+<!-- 未验证：访问密码门 -->
+<view class="gate" wx:if="{{!verified}}">
+  <view class="gate-card">
+    <view class="gate-icon">🔒</view>
+    <view class="gate-title">商家入口</view>
+    <view class="gate-sub">请输入管理密码查看询盘</view>
+    <input
+      class="gate-input"
+      type="text"
+      password
+      placeholder="管理密码"
+      value="{{code}}"
+      bindinput="onCodeInput"
+      bindconfirm="onVerify"
+    />
+    <button class="btn-primary gate-btn" bindtap="onVerify">进入</button>
+    <view class="gate-tip">密码在 config/index.js 的 adminCode 中配置</view>
+  </view>
+</view>
+
+<!-- 已验证：询盘列表 -->
+<view class="admin" wx:else>
+  <!-- 状态筛选 -->
+  <view class="tabs">
+    <view
+      class="tab {{filter === item.key ? 'tab-active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      bindtap="onFilter"
+      data-key="{{item.key}}"
+    >{{item.label}}</view>
+  </view>
+
+  <!-- 询盘列表 -->
+  <view class="list">
+    <view class="inq card" wx:for="{{list}}" wx:key="id">
+      <view class="inq-head">
+        <text class="inq-name">{{item.name}}</text>
+        <text class="inq-status s-{{item.status || 'new'}}">{{item.statusLabel}}</text>
+      </view>
+      <view class="inq-product" wx:if="{{item.productName}}">产品：{{item.productName}}</view>
+      <view class="inq-msg">{{item.message}}</view>
+      <view class="inq-meta">
+        <text class="inq-time">{{item.timeText}}</text>
+      </view>
+      <view class="inq-meta">
+        <text class="inq-phone" catchtap="callBack" data-phone="{{item.phone}}">📞 {{item.phone}} 回电</text>
+        <text class="inq-wechat" wx:if="{{item.wechat}}" catchtap="copyWechat" data-w="{{item.wechat}}">微信 {{item.wechat}} 复制</text>
+      </view>
+      <view class="inq-actions">
+        <view class="act" wx:if="{{(item.status || 'new') === 'new'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="followed">标为已跟进</view>
+        <view class="act" wx:if="{{(item.status || 'new') !== 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="closed">关闭</view>
+        <view class="act" wx:if="{{(item.status || 'new') === 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="new">重新打开</view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!list.length && !loading}}">暂无{{filterLabel}}询盘</view>
+    <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">{{loading ? '加载中…' : '加载更多'}}</view>
+  </view>
+</view>
