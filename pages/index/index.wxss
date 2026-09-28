@@ -71,15 +71,15 @@
   margin-bottom: 20rpx;
 }
 
+/* 新品上架横滑：页面内容宽 702rpx，每行恰好完整露出 3 张卡（220×3 + 间距 20×2） */
 .fresh-scroll {
   white-space: nowrap;
-  display: flex;
 }
 
 .fresh-item {
-  display: inline-flex;
-  flex-direction: column;
-  width: 240rpx;
+  display: inline-block;
+  vertical-align: top;
+  width: 220rpx;
   margin-right: 20rpx;
   background: #fff;
   border-radius: 16rpx;
@@ -88,8 +88,9 @@
 }
 
 .fresh-img {
-  width: 240rpx;
-  height: 240rpx;
+  display: block;
+  width: 220rpx;
+  height: 220rpx;
 }
 
 .fresh-name {
@@ -108,6 +109,7 @@
 }
 
 .about-card {
+  margin-top: 36rpx;
   border-left: 8rpx solid #b9432f;
 }
 

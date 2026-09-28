@@ -41,7 +41,7 @@
     <text class="title">新品上架</text>
     <text class="more" bindtap="goMore" data-type="new">更多 ›</text>
   </view>
-  <scroll-view class="fresh-scroll" scroll-x enable-flex>
+  <scroll-view class="fresh-scroll" scroll-x>
     <view class="fresh-item" wx:for="{{fresh}}" wx:key="id" hover-class="hover" bindtap="goDetail" data-id="{{item.id}}">
       <image class="fresh-img" src="{{item.cover}}" mode="aspectFill" />
       <text class="fresh-name">{{item.name}}</text>
