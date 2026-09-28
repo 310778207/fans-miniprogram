@@ -2,7 +2,7 @@
   <view class="cart-list">
     <view class="c-item" wx:for="{{items}}" wx:key="key">
       <view class="ck {{item.selected ? 'ck-on' : ''}}" catchtap="toggleSel" data-key="{{item.key}}"></view>
-      <image class="c-img" src="{{item.cover}}" mode="aspectFill" />
+      <image referrer-policy="no-referrer" class="c-img" src="{{item.cover}}" mode="aspectFill" />
       <view class="c-info">
         <view class="c-name">{{item.name}}</view>
         <view class="c-color" wx:if="{{item.color}}">{{item.color}}</view>

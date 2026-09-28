@@ -22,7 +22,7 @@
   <!-- 商品 -->
   <view class="card">
     <view class="od-item" wx:for="{{order.items}}" wx:key="index">
-      <image class="od-img" src="{{item.cover}}" mode="aspectFill" />
+      <image referrer-policy="no-referrer" class="od-img" src="{{item.cover}}" mode="aspectFill" />
       <view class="od-info">
         <view class="od-name">{{item.name}}</view>
         <view class="od-sku" wx:if="{{item.color}}">{{item.color}}</view>

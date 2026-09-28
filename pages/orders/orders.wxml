@@ -16,7 +16,7 @@
         <text class="o-status st-{{item.status}}">{{item.statusLabel}}</text>
       </view>
       <view class="o-item" wx:for="{{item.items}}" wx:for-item="g" wx:key="index">
-        <image class="o-img" src="{{g.cover}}" mode="aspectFill" />
+        <image referrer-policy="no-referrer" class="o-img" src="{{g.cover}}" mode="aspectFill" />
         <view class="o-info">
           <view class="o-name">{{g.name}}</view>
           <view class="o-sku" wx:if="{{g.color}}">{{g.color}}</view>

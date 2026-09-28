@@ -3,7 +3,7 @@
   <view class="gallery">
     <swiper class="gallery-swiper" circular bindchange="onSwiperChange">
       <swiper-item wx:for="{{product.gallery}}" wx:key="*this">
-        <image class="gallery-img" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-current="{{item}}" />
+        <image referrer-policy="no-referrer" class="gallery-img" src="{{item}}" mode="aspectFill" bindtap="openViewer" />
       </swiper-item>
     </swiper>
     <view class="gallery-count">{{currentIndex + 1}}/{{product.gallery.length}}</view>
@@ -68,7 +68,7 @@
       <view class="section-head"><text class="title">产品详情</text></view>
       <view class="card">
         <text class="d-desc">{{product.desc}}</text>
-        <image
+        <image referrer-policy="no-referrer"
           class="d-img"
           wx:for="{{product.gallery}}"
           wx:key="*this"
@@ -104,5 +104,15 @@
     </view>
     <view class="ab-cart" hover-class="hover" bindtap="addToCart">加入购物车</view>
     <view class="ab-buy" hover-class="hover" bindtap="buyNow">立即购买</view>
+  </view>
+
+  <!-- 全屏大图查看器（源站 CDN 有防盗链，wx.previewImage 不可用） -->
+  <view class="img-viewer" wx:if="{{viewerVisible}}" bindtap="closeViewer">
+    <swiper class="viewer-swiper" current="{{viewerIndex}}" circular bindchange="onViewerChange">
+      <swiper-item wx:for="{{product.gallery}}" wx:key="*this">
+        <image referrer-policy="no-referrer" class="viewer-img" src="{{item}}" mode="aspectFit" />
+      </swiper-item>
+    </swiper>
+    <view class="viewer-count">{{viewerIndex + 1}}/{{product.gallery.length}}</view>
   </view>
 </view>

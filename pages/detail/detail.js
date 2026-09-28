@@ -7,6 +7,8 @@ Page({
     product: null,
     related: [],
     currentIndex: 0,
+    viewerVisible: false,
+    viewerIndex: 0,
     selectedColor: '',
     quantity: 1,
     minQtyTip: '',
@@ -43,11 +45,17 @@ Page({
     this.setData({ currentIndex: e.detail.current })
   },
 
-  previewImage(e) {
-    wx.previewImage({
-      current: e.currentTarget.dataset.current,
-      urls: this.data.product.gallery
-    })
+  // 源站 CDN 有 Referer 防盗链，wx.previewImage 无法带 no-referrer，改用自建查看器
+  openViewer() {
+    this.setData({ viewerVisible: true, viewerIndex: this.data.currentIndex })
+  },
+
+  closeViewer() {
+    this.setData({ viewerVisible: false })
+  },
+
+  onViewerChange(e) {
+    this.setData({ viewerIndex: e.detail.current })
   },
 
   onColorTap(e) {

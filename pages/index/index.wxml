@@ -2,7 +2,7 @@
   <!-- Banner 轮播 -->
   <swiper class="banner" indicator-dots autoplay circular interval="4000" duration="500">
     <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-link="{{item.link}}">
-      <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+      <image referrer-policy="no-referrer" class="banner-img" src="{{item.image}}" mode="aspectFill" />
     </swiper-item>
   </swiper>
 
@@ -20,7 +20,7 @@
   </view>
   <view class="cate-grid">
     <view class="cate-item" wx:for="{{categories}}" wx:key="id" hover-class="hover" bindtap="goCategory" data-id="{{item.id}}">
-      <image class="cate-img" src="{{item.cover}}" mode="aspectFill" />
+      <image referrer-policy="no-referrer" class="cate-img" src="{{item.cover}}" mode="aspectFill" />
       <text class="cate-name">{{item.name}}</text>
     </view>
   </view>
@@ -43,7 +43,7 @@
   </view>
   <scroll-view class="fresh-scroll" scroll-x>
     <view class="fresh-item" wx:for="{{fresh}}" wx:key="id" hover-class="hover" bindtap="goDetail" data-id="{{item.id}}">
-      <image class="fresh-img" src="{{item.cover}}" mode="aspectFill" />
+      <image referrer-policy="no-referrer" class="fresh-img" src="{{item.cover}}" mode="aspectFill" />
       <text class="fresh-name">{{item.name}}</text>
       <text class="price fresh-price"><text class="rmb">¥</text>{{item.priceMin}} 起</text>
     </view>
