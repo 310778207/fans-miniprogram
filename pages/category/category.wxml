@@ -18,7 +18,7 @@
     </scroll-view>
 
     <!-- 右侧产品 -->
-    <scroll-view class="main" scroll-y>
+    <scroll-view class="main" scroll-y bindscrolltolower="onLoadMore">
       <view class="grid" wx:if="{{products.length}}">
         <view class="grid-item" wx:for="{{products}}" wx:key="id">
           <product-card product="{{item}}" />

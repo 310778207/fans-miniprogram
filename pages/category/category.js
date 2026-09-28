@@ -1,18 +1,21 @@
 const api = require('../../utils/api')
 
+const PAGE_SIZE = 30
+
 Page({
   data: {
     categories: [],
-    activeId: '',
+    activeId: 'all',
     products: []
   },
 
   async onLoad() {
     const categories = await api.getCategories()
-    this.setData({ categories })
+    // 「全部」对应源站 Products 页，包含未归入分类的新品
+    this.setData({ categories: [{ id: 'all', name: '全部' }].concat(categories) })
     // 默认选中第一个分类；若首页带来了指定分类则优先
     const pending = getApp().globalData.pendingCategoryId
-    const activeId = pending || (categories[0] && categories[0].id) || ''
+    const activeId = pending || 'all'
     getApp().globalData.pendingCategoryId = ''
     this.setData({ activeId })
     this.loadProducts(activeId)
@@ -29,8 +32,16 @@ Page({
   },
 
   async loadProducts(categoryId) {
-    const products = await api.getProducts({ categoryId })
-    this.setData({ products })
+    const all = await api.getProducts({ categoryId })
+    this._all = all
+    this.setData({ products: all.slice(0, PAGE_SIZE) })
+  },
+
+  onLoadMore() {
+    if (!this._all || this.data.products.length >= this._all.length) return
+    this.setData({
+      products: this._all.slice(0, this.data.products.length + PAGE_SIZE)
+    })
   },
 
   onSideTap(e) {

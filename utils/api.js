@@ -61,7 +61,11 @@ async function getCategories() {
 function filterProducts(list, opt) {
   opt = opt || {}
   return list.filter((p) => {
-    if (opt.categoryId && p.categoryId !== opt.categoryId) return false
+    if (opt.categoryId && opt.categoryId !== 'all') {
+      // 产品可属多个分类（与源站一致）：categoryIds 为准，categoryId 为首选分类
+      const ids = p.categoryIds || (p.categoryId ? [p.categoryId] : [])
+      if (ids.indexOf(opt.categoryId) === -1) return false
+    }
     if (opt.hot && !p.isHot) return false
     if (opt.isNew && !p.isNew) return false
     if (opt.keyword) {
@@ -77,7 +81,7 @@ async function getProducts(opt) {
   if (cloudReady()) {
     let q = db().collection('products')
     const where = {}
-    if (opt && opt.categoryId) where.categoryId = opt.categoryId
+    if (opt && opt.categoryId && opt.categoryId !== 'all') where.categoryId = opt.categoryId
     if (opt && opt.hot) where.isHot = true
     if (opt && opt.isNew) where.isNew = true
     if (opt && opt.keyword) {
@@ -116,7 +120,12 @@ async function getRelatedProducts(product) {
     }
     return list.slice(0, LIMIT)
   }
-  const same = mock.products.filter((p) => p.categoryId === product.categoryId && p.id !== product.id)
+  // 本地模式：优先同首选分类，再按多分类交集补齐，最后兜底热销
+  const catId = product.categoryId
+  const inCat = (p) => (p.categoryIds || []).indexOf(catId) !== -1
+  const same = catId
+    ? mock.products.filter((p) => p.id !== product.id && inCat(p))
+    : []
   if (same.length >= 3) return same.slice(0, LIMIT)
   const extra = mock.products.filter(
     (p) => p.isHot && p.id !== product.id && same.indexOf(p) === -1

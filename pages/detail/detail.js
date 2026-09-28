@@ -34,7 +34,7 @@ Page({
       minQtyTip: moq ? moq.value : '1 把起',
       selectedColor: (product.colors && product.colors[0]) || ''
     })
-    wx.setNavigationBarTitle({ title: product.name.slice(0, 12) || '产品详情' })
+    wx.setNavigationBarTitle({ title: product.name.slice(0, 20) || '产品详情' })
     // 相关推荐不阻塞主内容
     api.getRelatedProducts(product).then((related) => this.setData({ related }))
   },
@@ -77,7 +77,8 @@ Page({
 
   addToCart() {
     const { product, selectedColor, quantity } = this.data
-    if (!selectedColor) {
+    // 只有产品带颜色 SKU 时才必选（源站产品无颜色规格）
+    if (product.colors && product.colors.length && !selectedColor) {
       wx.showToast({ title: '请先选择颜色', icon: 'none' })
       return
     }
@@ -87,7 +88,7 @@ Page({
 
   buyNow() {
     const { product, selectedColor, quantity } = this.data
-    if (!selectedColor) {
+    if (product.colors && product.colors.length && !selectedColor) {
       wx.showToast({ title: '请先选择颜色', icon: 'none' })
       return
     }

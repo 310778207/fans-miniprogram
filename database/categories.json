@@ -1,6 +1,6 @@
-{"id":"c01","name":"木扇","cover":"/images/p01_1.jpg","sort":1}
-{"id":"c02","name":"竹扇","cover":"/images/p03_1.jpg","sort":2}
-{"id":"c03","name":"塑料扇","cover":"/images/p05_1.jpg","sort":3}
-{"id":"c04","name":"大扇","cover":"/images/p07_1.jpg","sort":4}
-{"id":"c05","name":"蕾丝扇","cover":"/images/p09_1.jpg","sort":5}
-{"id":"c06","name":"定制礼扇","cover":"/images/p11_1.jpg","sort":6}
+{"id":"c-wooden","name":"木扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/ppBpqKpiplSRmlroqljjkp/weixintupian_20260917152624_93_9.jpg","sort":1}
+{"id":"c-bamboo","name":"竹扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/pnBpqKpiplSRmlonkilmkm/fa4e9e30-28f5-4ef4-a035-abf03441792a.jpg","sort":2}
+{"id":"c-plastic","name":"塑料扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/pmBpqKpiplSRmlplpmrkkm/46a01560-4792-4635-bdf5-af41921ab4b1.jpg","sort":3}
+{"id":"c-paddle","name":"板扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/pmBpqKpiplSRmlpljrrpkp/weixintupian_20260511141550_77_9.jpg","sort":4}
+{"id":"c-large","name":"大扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/ppBpqKpiplSRmlmlprrrkp/weixintupian_20260604105806_455_9.jpg","sort":5}
+{"id":"c-lace","name":"蕾丝扇","cover":"https://iirqrwxhpmpmpj5r.ldycdn.com/cloud/pmBpqKpiplSRmlplirrmkp/81d6c4fb-3789-4346-9947-4632af27b4a3.jpg","sort":6}

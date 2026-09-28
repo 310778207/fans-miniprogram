@@ -18,7 +18,7 @@
           <text class="rmb">¥</text>{{product.priceMin}}<text wx:if="{{product.priceMax > product.priceMin}}"> - {{product.priceMax}}</text>
           <text class="d-price-unit">/ 把</text>
         </view>
-        <text class="d-sales">已售 {{product.sales}}</text>
+        <text class="d-sales" wx:if="{{product.sales}}">已售 {{product.sales}}</text>
       </view>
       <view class="d-tags">
         <text class="tag">厂家直供</text>
@@ -29,17 +29,22 @@
 
     <!-- 颜色 / 数量 -->
     <view class="card">
-      <view class="d-label">颜色</view>
-      <view class="chips">
-        <view
-          class="chip {{selectedColor === item ? 'chip-active' : ''}}"
-          wx:for="{{product.colors}}"
-          wx:key="*this"
-          bindtap="onColorTap"
-          data-color="{{item}}"
-        >{{item}}</view>
-      </view>
-      <view class="d-label d-qty-label">数量</view>
+      <block wx:if="{{product.colors.length}}">
+        <view class="d-label">颜色</view>
+        <view class="chips">
+          <view
+            class="chip {{selectedColor === item ? 'chip-active' : ''}}"
+            wx:for="{{product.colors}}"
+            wx:key="*this"
+            bindtap="onColorTap"
+            data-color="{{item}}"
+          >{{item}}</view>
+        </view>
+        <view class="d-label d-qty-label">数量</view>
+      </block>
+      <block wx:else>
+        <view class="d-label">数量</view>
+      </block>
       <view class="stepper">
         <view class="step-btn" hover-class="hover" bindtap="onQtyMinus">−</view>
         <input class="step-input" type="number" value="{{quantity}}" bindblur="onQtyInput" />
@@ -50,7 +55,7 @@
     </view>
 
     <!-- 规格参数 -->
-    <view class="card">
+    <view class="card" wx:if="{{product.specs.length}}">
       <view class="d-label">规格参数</view>
       <view class="spec-row" wx:for="{{product.specs}}" wx:key="label">
         <text class="spec-key">{{item.label}}</text>
@@ -59,18 +64,20 @@
     </view>
 
     <!-- 图文详情 -->
-    <view class="section-head"><text class="title">产品详情</text></view>
-    <view class="card">
-      <text class="d-desc">{{product.desc}}</text>
-      <image
-        class="d-img"
-        wx:for="{{product.gallery}}"
-        wx:key="*this"
-        src="{{item}}"
-        mode="widthFix"
-        lazy-load="{{true}}"
-      />
-    </view>
+    <block wx:if="{{product.desc}}">
+      <view class="section-head"><text class="title">产品详情</text></view>
+      <view class="card">
+        <text class="d-desc">{{product.desc}}</text>
+        <image
+          class="d-img"
+          wx:for="{{product.gallery}}"
+          wx:key="*this"
+          src="{{item}}"
+          mode="widthFix"
+          lazy-load="{{true}}"
+        />
+      </view>
+    </block>
 
     <!-- 猜你喜欢 -->
     <view class="section-head"><text class="title">猜你喜欢</text></view>

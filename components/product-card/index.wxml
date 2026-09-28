@@ -4,7 +4,7 @@
     <view class="name">{{product.name}}</view>
     <view class="price"><text class="rmb">¥</text>{{product.priceMin}}<text wx:if="{{product.priceMax > product.priceMin}}" class="range">-{{product.priceMax}}</text></view>
     <view class="meta">
-      <text class="sales">已售 {{product.sales}}</text>
+      <text class="sales" wx:if="{{product.sales}}">已售 {{product.sales}}</text>
       <text class="tag" wx:if="{{product.isNew}}">新品</text>
     </view>
   </view>
