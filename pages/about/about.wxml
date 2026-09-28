@@ -1,7 +1,7 @@
 <view class="page">
   <!-- 品牌头图 -->
   <view class="hero">
-    <image class="hero-img" src="/images/banner2.png" mode="aspectFill" />
+    <image class="hero-img" src="/images/banner2.jpg" mode="aspectFill" />
     <view class="hero-text">
       <view class="hero-brand">{{config.brand}}</view>
       <view class="hero-slogan">{{config.slogan}}</view>

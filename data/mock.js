@@ -2,22 +2,23 @@
  * 本地示例数据：结构与云数据库集合一一对应，
  * 开通云开发后把 useCloud 打开，字段保持一致即可无缝切换。
  *
- * 图片为本地占位图，上线前请替换为真实商品图（本地路径或 CDN 地址均可）。
+ * 图片已替换为 fareafans.com（领动建站）的真实商品图，本地压缩为 500×500 JPG。
+ * 每张图与源站的对应关系见 tools/image_sources.json，如需换图可照该文件重新抓取。
  */
 
 const banners = [
-  { id: 'b1', image: '/images/banner1.png', link: '' },
-  { id: 'b2', image: '/images/banner2.png', link: '' },
-  { id: 'b3', image: '/images/banner3.png', link: '' }
+  { id: 'b1', image: '/images/banner1.jpg', link: '' },
+  { id: 'b2', image: '/images/banner2.jpg', link: '' },
+  { id: 'b3', image: '/images/banner3.jpg', link: '' }
 ]
 
 const categories = [
-  { id: 'c01', name: '木扇', cover: '/images/p01_1.png' },
-  { id: 'c02', name: '竹扇', cover: '/images/p03_1.png' },
-  { id: 'c03', name: '塑料扇', cover: '/images/p05_1.png' },
-  { id: 'c04', name: '大扇', cover: '/images/p07_1.png' },
-  { id: 'c05', name: '蕾丝扇', cover: '/images/p09_1.png' },
-  { id: 'c06', name: '定制礼扇', cover: '/images/p11_1.png' }
+  { id: 'c01', name: '木扇', cover: '/images/p01_1.jpg' },
+  { id: 'c02', name: '竹扇', cover: '/images/p03_1.jpg' },
+  { id: 'c03', name: '塑料扇', cover: '/images/p05_1.jpg' },
+  { id: 'c04', name: '大扇', cover: '/images/p07_1.jpg' },
+  { id: 'c05', name: '蕾丝扇', cover: '/images/p09_1.jpg' },
+  { id: 'c06', name: '定制礼扇', cover: '/images/p11_1.jpg' }
 ]
 
 const products = [
@@ -27,8 +28,8 @@ const products = [
     categoryId: 'c01',
     priceMin: 3.5,
     priceMax: 6.8,
-    cover: '/images/p01_1.png',
-    gallery: ['/images/p01_1.png', '/images/p01_2.png', '/images/p01_3.png'],
+    cover: '/images/p01_1.jpg',
+    gallery: ['/images/p01_1.jpg', '/images/p01_2.jpg', '/images/p01_3.jpg'],
     colors: ['大红', '玫红', '金色', '黑色'],
     specs: [
       { label: '尺寸', value: '10寸（约33cm）' },
@@ -47,8 +48,8 @@ const products = [
     categoryId: 'c01',
     priceMin: 8.8,
     priceMax: 15.0,
-    cover: '/images/p02_1.png',
-    gallery: ['/images/p02_1.png', '/images/p02_2.png', '/images/p02_3.png'],
+    cover: '/images/p02_1.jpg',
+    gallery: ['/images/p02_1.jpg', '/images/p02_2.jpg', '/images/p02_3.jpg'],
     colors: ['原木色', '深棕', '枣红'],
     specs: [
       { label: '尺寸', value: '8寸（约26cm）' },
@@ -67,8 +68,8 @@ const products = [
     categoryId: 'c02',
     priceMin: 5.2,
     priceMax: 9.9,
-    cover: '/images/p03_1.png',
-    gallery: ['/images/p03_1.png', '/images/p03_2.png', '/images/p03_3.png'],
+    cover: '/images/p03_1.jpg',
+    gallery: ['/images/p03_1.jpg', '/images/p03_2.jpg', '/images/p03_3.jpg'],
     colors: ['米白', '浅青', '绯红'],
     specs: [
       { label: '尺寸', value: '9寸（约30cm）' },
@@ -87,8 +88,8 @@ const products = [
     categoryId: 'c02',
     priceMin: 4.5,
     priceMax: 8.0,
-    cover: '/images/p04_1.png',
-    gallery: ['/images/p04_1.png', '/images/p04_2.png', '/images/p04_3.png'],
+    cover: '/images/p04_1.jpg',
+    gallery: ['/images/p04_1.jpg', '/images/p04_2.jpg', '/images/p04_3.jpg'],
     colors: ['A款', 'B款', 'C款', 'D款'],
     specs: [
       { label: '尺寸', value: '8寸 / 9寸' },
@@ -107,8 +108,8 @@ const products = [
     categoryId: 'c03',
     priceMin: 2.8,
     priceMax: 5.5,
-    cover: '/images/p05_1.png',
-    gallery: ['/images/p05_1.png', '/images/p05_2.png', '/images/p05_3.png'],
+    cover: '/images/p05_1.jpg',
+    gallery: ['/images/p05_1.jpg', '/images/p05_2.jpg', '/images/p05_3.jpg'],
     colors: ['幻彩', '银色', '金色', '黑色'],
     specs: [
       { label: '尺寸', value: '11寸（约36cm）' },
@@ -127,8 +128,8 @@ const products = [
     categoryId: 'c03',
     priceMin: 3.2,
     priceMax: 6.0,
-    cover: '/images/p06_1.png',
-    gallery: ['/images/p06_1.png', '/images/p06_2.png', '/images/p06_3.png'],
+    cover: '/images/p06_1.jpg',
+    gallery: ['/images/p06_1.jpg', '/images/p06_2.jpg', '/images/p06_3.jpg'],
     colors: ['香槟金', '裸粉', '月光白'],
     specs: [
       { label: '尺寸', value: '10寸（约33cm）' },
@@ -147,8 +148,8 @@ const products = [
     categoryId: 'c04',
     priceMin: 25.0,
     priceMax: 42.0,
-    cover: '/images/p07_1.png',
-    gallery: ['/images/p07_1.png', '/images/p07_2.png', '/images/p07_3.png'],
+    cover: '/images/p07_1.jpg',
+    gallery: ['/images/p07_1.jpg', '/images/p07_2.jpg', '/images/p07_3.jpg'],
     colors: ['渐变红', '渐变蓝', '彩虹'],
     specs: [
       { label: '尺寸', value: '全长约1.5米' },
@@ -167,8 +168,8 @@ const products = [
     categoryId: 'c04',
     priceMin: 18.0,
     priceMax: 30.0,
-    cover: '/images/p08_1.png',
-    gallery: ['/images/p08_1.png', '/images/p08_2.png', '/images/p08_3.png'],
+    cover: '/images/p08_1.jpg',
+    gallery: ['/images/p08_1.jpg', '/images/p08_2.jpg', '/images/p08_3.jpg'],
     colors: ['红黄渐变', '蓝紫渐变', '绿金渐变'],
     specs: [
       { label: '尺寸', value: '全长约1.2米' },
@@ -187,8 +188,8 @@ const products = [
     categoryId: 'c05',
     priceMin: 6.5,
     priceMax: 12.0,
-    cover: '/images/p09_1.png',
-    gallery: ['/images/p09_1.png', '/images/p09_2.png', '/images/p09_3.png'],
+    cover: '/images/p09_1.jpg',
+    gallery: ['/images/p09_1.jpg', '/images/p09_2.jpg', '/images/p09_3.jpg'],
     colors: ['象牙白', '黑色', '咖啡'],
     specs: [
       { label: '尺寸', value: '9寸（约30cm）' },
@@ -207,8 +208,8 @@ const products = [
     categoryId: 'c05',
     priceMin: 9.8,
     priceMax: 16.0,
-    cover: '/images/p10_1.png',
-    gallery: ['/images/p10_1.png', '/images/p10_2.png', '/images/p10_3.png'],
+    cover: '/images/p10_1.jpg',
+    gallery: ['/images/p10_1.jpg', '/images/p10_2.jpg', '/images/p10_3.jpg'],
     colors: ['正红', '宝蓝', '紫色'],
     specs: [
       { label: '尺寸', value: '10寸（约33cm）' },
@@ -227,8 +228,8 @@ const products = [
     categoryId: 'c06',
     priceMin: 2.2,
     priceMax: 4.8,
-    cover: '/images/p11_1.png',
-    gallery: ['/images/p11_1.png', '/images/p11_2.png', '/images/p11_3.png'],
+    cover: '/images/p11_1.jpg',
+    gallery: ['/images/p11_1.jpg', '/images/p11_2.jpg', '/images/p11_3.jpg'],
     colors: ['Pantone色可调'],
     specs: [
       { label: '尺寸', value: '7寸 / 8寸 / 9寸' },
@@ -247,8 +248,8 @@ const products = [
     categoryId: 'c06',
     priceMin: 28.0,
     priceMax: 58.0,
-    cover: '/images/p12_1.png',
-    gallery: ['/images/p12_1.png', '/images/p12_2.png', '/images/p12_3.png'],
+    cover: '/images/p12_1.jpg',
+    gallery: ['/images/p12_1.jpg', '/images/p12_2.jpg', '/images/p12_3.jpg'],
     colors: ['缎面红', '藏蓝', '墨绿'],
     specs: [
       { label: '尺寸', value: '9寸 / 10寸' },
