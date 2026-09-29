@@ -76,8 +76,10 @@ fans-miniprogram/
    - 右键 `cloudfunctions/` 下 **6 个云函数** → 分别「上传并部署」。
      （若编辑器左侧没显示 cloudfunctions 目录：`project.config.json` 的根级加上
      `"cloudfunctionRoot": "cloudfunctions/"` 后重新打开项目即可）
-   - `inquiries/orders` 集合权限保持「仅创建者可读写」即可：管理页和订单读写都走云函数
-     （管理员权限），普通用户看不到别人的询盘和订单，数据安全。
+   - 集合权限（见 `database/README.md` 权限表）：`banners/categories/products` 设
+     「所有用户可读，仅创建者可读写」（首页/列表是客户端直查，设成仅创建者可读会空白）；
+     `orders` 设「仅创建者可读写」（createOrder 写入 _openid，用户只能看自己的单）；
+     `inquiries` 设「仅管理端可读写」（读写都走云函数，普通用户看不到别人的询盘）。
 
 ## 发布检查清单
 
@@ -86,7 +88,7 @@ fans-miniprogram/
 - [ ] 小程序后台 → 客服 → 添加客服人员（「在线客服」按钮才有效）
 - [ ] 云开发环境已建，6 个云函数（submitInquiry / adminInquiries / createOrder /
       payOrder / payCallback / orderAction）均已部署
-- [ ] `inquiries`、`orders` 集合已创建（权限「仅创建者可读写」即可）
+- [ ] 5 个集合已创建且权限正确（按 `database/README.md` 的权限表逐个核对）
 - [ ] 小程序类目建议：**商家自营 > 工艺品**（按你的实际资质选择）
 - [ ] 真机预览：iOS/Android 各过一遍详情页与询盘提交
 

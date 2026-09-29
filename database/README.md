@@ -1,16 +1,19 @@
 # 云数据库集合设计（开通云开发后创建）
 
 在开发者工具「云开发 → 数据库」里创建以下 5 个集合，字段与 `data/mock.js` 保持一致。
-`banners/categories/products` 由控制台维护；`inquiries/orders` 分别由云函数写入，
-权限都设为「仅创建者可读写」即可（读写走云函数管理员权限，普通用户看不到别人的数据）。
+`banners/categories/products` 由控制台维护、**客户端直接查询**，权限必须是
+「所有用户可读，仅创建者可读写」——若设成「仅创建者可读写」，控制台导入的数据没有
+`_openid`，用户端一条都查不到，首页/列表会空白；
+`inquiries` 读写都走云函数（submitInquiry / adminInquiries），设「仅管理端可读写」；
+`orders` 由 createOrder 云函数写入并带 `_openid`，用户端只查自己的单，设「仅创建者可读写」。
 
 | 集合 | 用途 | 权限 |
 |---|---|---|
-| banners | 首页轮播 | 仅创建者可读写 |
-| categories | 产品分类 | 仅创建者可读写 |
-| products | 产品 | 仅创建者可读写 |
-| inquiries | 询盘留言（submitInquiry 写入） | 仅创建者可读写 |
-| orders | 零售订单（createOrder 写入） | 仅创建者可读写 |
+| banners | 首页轮播 | 所有用户可读，仅创建者可读写 |
+| categories | 产品分类 | 所有用户可读，仅创建者可读写 |
+| products | 产品 | 所有用户可读，仅创建者可读写 |
+| inquiries | 询盘留言（submitInquiry 写入） | 仅管理端可读写 |
+| orders | 零售订单（createOrder 写入，含 _openid） | 仅创建者可读写 |
 
 > 购物车和收货地址簿保存在客户端本地存储，不需要建集合；
 > 订单创建时会把地址快照写进订单，所以地址簿放本地即可。

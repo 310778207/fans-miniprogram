@@ -2,6 +2,7 @@
   "compileType": "miniprogram",
   "appid": "wx32320ef881f13ad0",
   "projectname": "fans-miniprogram",
+  "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
     "es6": true,
     "postcss": true,
