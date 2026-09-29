@@ -1,11 +1,45 @@
 <view class="page">
-  <!-- 用户头部 -->
-  <view class="pf-head">
-    <view class="pf-avatar">👤</view>
-    <view class="pf-user">
-      <view class="pf-name">微信用户</view>
-      <view class="pf-slogan">{{config.slogan}}</view>
-    </view>
+  <!-- 用户头部：未登录点击整块登录；已登录支持微信头像/昵称填写 -->
+  <view class="pf-head" hover-class="{{user ? 'none' : 'hover'}}" bindtap="onHeadTap">
+    <!-- 未登录 -->
+    <block wx:if="{{!user}}">
+      <view class="pf-avatar">👤</view>
+      <view class="pf-user">
+        <view class="pf-name">点击登录</view>
+        <view class="pf-slogan">登录后管理订单与收货信息</view>
+      </view>
+    </block>
+    <!-- 已登录 -->
+    <block wx:else>
+      <button
+        class="pf-avatar pf-avatar-btn"
+        open-type="chooseAvatar"
+        bindchooseavatar="onChooseAvatar"
+        hover-class="hover"
+      >
+        <image wx:if="{{user.avatar}}" class="pf-avatar-img" src="{{user.avatar}}" mode="aspectFill" />
+        <view wx:else class="pf-avatar-ph">👤</view>
+      </button>
+      <view class="pf-user">
+        <input
+          wx:if="{{editingName}}"
+          class="pf-name-input"
+          type="nickname"
+          value="{{user.nickname}}"
+          focus="{{editingName}}"
+          placeholder="填写昵称"
+          maxlength="20"
+          placeholder-class="pf-name-input-ph"
+          bindblur="onNameBlur"
+          bindconfirm="onNameConfirm"
+        />
+        <view wx:else class="pf-name pf-name-tap" bindtap="startEditName">
+          <text>{{user.nickname || '设置昵称'}}</text>
+          <text class="pf-edit-ico">✏️</text>
+        </view>
+        <view class="pf-slogan">{{config.slogan}}</view>
+      </view>
+    </block>
   </view>
 
   <!-- 我的订单 -->
@@ -63,6 +97,11 @@
     <view class="pf-row" hover-class="hover" bindtap="goAdmin">
       <text class="pf-row-icon">🔐</text>
       <text class="pf-row-label">商家入口 · 询盘管理</text>
+      <text class="pf-row-arrow">›</text>
+    </view>
+    <view wx:if="{{user}}" class="pf-row pf-logout" hover-class="hover" bindtap="logout">
+      <text class="pf-row-icon">🚪</text>
+      <text class="pf-row-label">退出登录</text>
       <text class="pf-row-arrow">›</text>
     </view>
   </view>

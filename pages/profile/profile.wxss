@@ -29,6 +29,60 @@ page {
   font-weight: 700;
 }
 
+/* 已登录：头像可点（微信 chooseAvatar 能力），重置 button 默认样式 */
+.pf-avatar-btn {
+  padding: 0;
+  margin: 0 26rpx 0 0;
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1.2;
+  font-size: 56rpx;
+}
+
+.pf-avatar-btn::after {
+  border: none;
+}
+
+.pf-avatar-img {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  display: block;
+}
+
+.pf-name-tap {
+  display: flex;
+  align-items: center;
+}
+
+.pf-edit-ico {
+  font-size: 22rpx;
+  margin-left: 12rpx;
+  opacity: 0.8;
+}
+
+.pf-name-input {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #fff;
+  width: 100%;
+}
+
+.pf-name-input-ph {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.pf-logout .pf-row-label {
+  color: #b9432f;
+}
+
 .pf-slogan {
   font-size: 24rpx;
   opacity: 0.85;
