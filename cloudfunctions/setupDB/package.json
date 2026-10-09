@@ -1,0 +1,9 @@
+{
+  "name": "setupDB",
+  "version": "1.0.0",
+  "description": "一次性初始化云数据库：建集合 + 导入种子数据（幂等可续传）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
