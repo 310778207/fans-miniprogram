@@ -91,6 +91,13 @@ Page({
     })
   },
 
+  copyTracking() {
+    wx.setClipboardData({
+      data: this.data.order.trackingNo,
+      success: () => wx.showToast({ title: '单号已复制', icon: 'success' })
+    })
+  },
+
   async onPay() {
     if (this.data.paying) return
     this.setData({ paying: true })

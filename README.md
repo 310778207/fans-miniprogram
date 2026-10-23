@@ -13,7 +13,7 @@
 | 询盘表单 + WhatsApp / tel / mailto | 询盘表单（云函数落库）+ 在线客服（小程序客服会话）+ 拨打电话 + 复制微信/邮箱 |
 | About Us / Trusted Clients | 「关于」tab：简介、实力数据、优势、联系方式 |
 | —（原站没有） | 详情页「猜你喜欢」：同分类产品推荐，兜底热销款 |
-| —（原站用邮箱看询盘） | **商家询盘管理页**（我的页「商家入口」，密码在 `config.adminCode`）：筛选待跟进/已跟进/已关闭、一键回电、复制买家微信、改跟进状态 |
+| —（原站用邮箱看询盘） | **商家管理页**（我的页「商家入口」，密码在 `config.adminCode`）：询盘——筛选待跟进/已跟进/已关闭、一键回电、复制买家微信、改跟进状态；订单——查全部买家订单、待发货一键发货（**填快递单号**）、联系买家、复制单号 |
 | —（原站没有，线上零售） | **完整零售链路**：购物车（tabBar 角标）→ 收货地址簿 → 结算页 → 微信支付（mock/云双模式）→ 订单列表/详情（待付款/待发货/已发货/已完成，取消订单、确认收货） |
 | SEO（Google 自然流量） | 小程序内搜流量：页面配置了分享卡片（onShareAppMessage） |
 
@@ -45,10 +45,11 @@ fans-miniprogram/
 │   ├── order-detail/                # 订单详情（状态/地址/金额/时间线，演示模式可模拟发货）
 │   ├── address/list|edit            # 收货地址管理（增删改/默认地址/结算选地址）
 │   ├── about/                       # 品牌介绍（简介、实力数据、优势、联系方式）
-│   └── admin/                       # 商家询盘管理（密码门 + 状态筛选 + 回电/复制微信）
+│   └── admin/                       # 商家管理（密码门 + 询盘跟进 + 订单发货）
 ├── cloudfunctions/
 │   ├── submitInquiry/               # 询盘落库（含企业微信通知示例代码）
 │   ├── adminInquiries/              # 询盘列表/改状态（管理员权限，绕过集合权限规则）
+│   ├── adminOrders/                 # 商家订单管理：全部订单列表 + 发货（带快递单号）
 │   ├── createOrder/                 # 创建订单：服务端按 products 重算金额（不信任前端价格）
 │   ├── payOrder/                    # 微信支付下单（cloudPay.unifiedOrder，需填商户号）
 │   ├── payCallback/                 # 支付结果回调：置订单为已支付（幂等）
@@ -67,13 +68,15 @@ fans-miniprogram/
 3. **体验完整流程**：
    - 询盘闭环：提交几条询盘 → 「我的」→「商家入口 · 询盘管理」，输入 `adminCode`（默认 888888）查看并跟进；
    - 零售闭环：详情页选颜色「加入购物车」→ 购物车勾选结算 → 添加收货地址 → 提交订单 →
-     **模拟支付成功** → 订单出现「待发货」→ 订单详情「模拟发货」→「确认收货」完成。
-     （默认 `payment.mode: 'mock'`，不真扣款即可跑通全部流程）
+     **模拟支付成功** → 订单出现「待发货」→「我的 → 商家入口 → 订单」点「发货」填快递单号
+     → 买家订单详情可见单号 →「确认收货」完成。
+     （默认 `payment.mode: 'mock'`，不真扣款即可跑通全部流程；本地演示模式下订单详情另有「模拟发货」按钮）
 4. **上线前开通云开发**（可选但推荐）：
    - 开发者工具 → 云开发 → 开通，记下环境 ID；
    - `config/index.js` 里 `useCloud: true`，填 `cloudEnv`；
    - 按 `database/README.md` 创建 5 个集合并导入示例 JSON，再把真实产品录进去（控制台即可维护，无需开发后台）；
-   - 右键 `cloudfunctions/` 下 **6 个云函数** → 分别「上传并部署」。
+   - 右键 `cloudfunctions/` 下各云函数 → 分别「上传并部署（云端安装依赖）」
+     （setupDB 仅首次建库需要，user / adminOrders 等业务函数部署一次即可）。
      （若编辑器左侧没显示 cloudfunctions 目录：`project.config.json` 的根级加上
      `"cloudfunctionRoot": "cloudfunctions/"` 后重新打开项目即可）
    - 集合权限（见 `database/README.md` 权限表）：`banners/categories/products` 设
@@ -83,11 +86,13 @@ fans-miniprogram/
 
 ## 发布检查清单
 
-- [ ] `config/index.js` 全部信息已替换（含 `adminCode` 管理密码）
+- [ ] `config/index.js` 全部信息已替换（含 `adminCode` 管理密码；若改过密码，
+      记得同步改 `adminInquiries` / `adminOrders` 两个云函数里的 `ADMIN_CODE` 并重新部署）
 - [ ] 占位图已换成真实商品图（建议 750×750 以上）
 - [ ] 小程序后台 → 客服 → 添加客服人员（「在线客服」按钮才有效）
-- [ ] 云开发环境已建，6 个云函数（submitInquiry / adminInquiries / createOrder /
-      payOrder / payCallback / orderAction）均已部署
+- [ ] 云开发环境已建，8 个云函数（submitInquiry / adminInquiries / adminOrders /
+      createOrder / payOrder / payCallback / orderAction / user）均已部署
+      （setupDB 是一次性建库的临时函数，数据库建好后无需部署）
 - [ ] 5 个集合已创建且权限正确（按 `database/README.md` 的权限表逐个核对）
 - [ ] 小程序类目建议：**商家自营 > 工艺品**（按你的实际资质选择）
 - [ ] 真机预览：iOS/Android 各过一遍详情页与询盘提交

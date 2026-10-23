@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "询盘管理",
+  "navigationBarTitleText": "商家管理",
+  "enablePullDownRefresh": true,
   "usingComponents": {}
 }

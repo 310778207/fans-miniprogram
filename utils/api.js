@@ -185,7 +185,7 @@ async function listInquiries(opt) {
   if (cloudReady()) {
     const res = await wx.cloud.callFunction({
       name: 'adminInquiries',
-      data: { action: 'list', status, skip, limit }
+      data: { action: 'list', status, skip, limit, adminCode: config.adminCode }
     })
     if (res.result && res.result.code !== 0) throw new Error(res.result.msg || '读取失败')
     return {
@@ -207,7 +207,7 @@ async function updateInquiryStatus(id, status) {
   if (cloudReady()) {
     const res = await wx.cloud.callFunction({
       name: 'adminInquiries',
-      data: { action: 'updateStatus', id, status }
+      data: { action: 'updateStatus', id, status, adminCode: config.adminCode }
     })
     if (res.result && res.result.code !== 0) throw new Error(res.result.msg || '更新失败')
     return res.result
@@ -366,6 +366,49 @@ function mockShip(id) {
   })
 }
 
+/* ---------------- 订单管理（商家端） ---------------- */
+async function adminListOrders(opt) {
+  opt = opt || {}
+  const status = opt.status || 'all'
+  const skip = opt.skip || 0
+  const limit = opt.limit || 20
+  if (cloudReady()) {
+    const res = await wx.cloud.callFunction({
+      name: 'adminOrders',
+      data: { action: 'list', status, skip, limit, adminCode: config.adminCode }
+    })
+    if (res.result && res.result.code !== 0) throw new Error(res.result.msg || '读取失败')
+    return {
+      list: res.result.list,
+      total: res.result.total,
+      hasMore: skip + res.result.list.length < res.result.total
+    }
+  }
+  const all = (wx.getStorageSync(ORDER_KEY) || []).sort((a, b) => b.createdAt - a.createdAt)
+  const filtered = status === 'all' ? all : all.filter((o) => o.status === status)
+  const list = filtered.slice(skip, skip + limit)
+  return { list, total: filtered.length, hasMore: skip + list.length < filtered.length }
+}
+
+/** 商家发货：待发货 → 已发货，可携带快递单号 */
+async function adminShipOrder(id, trackingNo) {
+  if (cloudReady()) {
+    const res = await wx.cloud.callFunction({
+      name: 'adminOrders',
+      data: { action: 'ship', id, trackingNo, adminCode: config.adminCode }
+    })
+    if (res.result && res.result.code !== 0) throw new Error(res.result.msg || '发货失败')
+    return res.result
+  }
+  updateLocalOrder(id, (o) => {
+    if (o.status !== 'paid') throw new Error('仅「待发货」订单可以发货')
+    o.status = 'shipped'
+    o.shippedAt = Date.now()
+    if (trackingNo) o.trackingNo = String(trackingNo).slice(0, 64)
+  })
+  return { code: 0 }
+}
+
 module.exports = {
   init,
   cloudReady,
@@ -383,5 +426,7 @@ module.exports = {
   getOrder,
   cancelOrder,
   confirmReceive,
-  mockShip
+  mockShip,
+  adminListOrders,
+  adminShipOrder
 }

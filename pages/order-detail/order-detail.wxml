@@ -42,6 +42,7 @@
     <view class="od-meta"><text class="od-key">创建时间</text><text class="od-val">{{order.timeText}}</text></view>
     <view class="od-meta" wx:if="{{order.paidText}}"><text class="od-key">付款时间</text><text class="od-val">{{order.paidText}}</text></view>
     <view class="od-meta" wx:if="{{order.shippedText}}"><text class="od-key">发货时间</text><text class="od-val">{{order.shippedText}}</text></view>
+    <view class="od-meta" wx:if="{{order.trackingNo}}"><text class="od-key">快递单号</text><text class="od-val" bindtap="copyTracking">{{order.trackingNo}} 复制</text></view>
   </view>
 
   <!-- 操作 -->

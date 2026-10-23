@@ -1,0 +1,9 @@
+{
+  "name": "adminOrders",
+  "version": "1.0.0",
+  "description": "商家订单管理：订单列表与发货（含快递单号）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

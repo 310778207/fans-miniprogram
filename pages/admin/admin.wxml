@@ -3,7 +3,7 @@
   <view class="gate-card">
     <view class="gate-icon">🔒</view>
     <view class="gate-title">商家入口</view>
-    <view class="gate-sub">请输入管理密码查看询盘</view>
+    <view class="gate-sub">请输入管理密码，管理询盘与订单</view>
     <input
       class="gate-input"
       type="text"
@@ -18,43 +18,100 @@
   </view>
 </view>
 
-<!-- 已验证：询盘列表 -->
+<!-- 已验证：询盘 / 订单 管理 -->
 <view class="admin" wx:else>
-  <!-- 状态筛选 -->
-  <view class="tabs">
+  <!-- 板块切换 -->
+  <view class="sections">
     <view
-      class="tab {{filter === item.key ? 'tab-active' : ''}}"
-      wx:for="{{tabs}}"
-      wx:key="key"
-      bindtap="onFilter"
-      data-key="{{item.key}}"
-    >{{item.label}}</view>
+      class="sec {{section === 'inquiry' ? 'sec-active' : ''}}"
+      bindtap="onSection"
+      data-section="inquiry"
+    >询盘</view>
+    <view
+      class="sec {{section === 'order' ? 'sec-active' : ''}}"
+      bindtap="onSection"
+      data-section="order"
+    >订单</view>
   </view>
 
-  <!-- 询盘列表 -->
-  <view class="list">
-    <view class="inq card" wx:for="{{list}}" wx:key="id">
-      <view class="inq-head">
-        <text class="inq-name">{{item.name}}</text>
-        <text class="inq-status s-{{item.status || 'new'}}">{{item.statusLabel}}</text>
-      </view>
-      <view class="inq-product" wx:if="{{item.productName}}">产品：{{item.productName}}</view>
-      <view class="inq-msg">{{item.message}}</view>
-      <view class="inq-meta">
-        <text class="inq-time">{{item.timeText}}</text>
-      </view>
-      <view class="inq-meta">
-        <text class="inq-phone" catchtap="callBack" data-phone="{{item.phone}}">📞 {{item.phone}} 回电</text>
-        <text class="inq-wechat" wx:if="{{item.wechat}}" catchtap="copyWechat" data-w="{{item.wechat}}">微信 {{item.wechat}} 复制</text>
-      </view>
-      <view class="inq-actions">
-        <view class="act" wx:if="{{(item.status || 'new') === 'new'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="followed">标为已跟进</view>
-        <view class="act" wx:if="{{(item.status || 'new') !== 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="closed">关闭</view>
-        <view class="act" wx:if="{{(item.status || 'new') === 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="new">重新打开</view>
-      </view>
+  <!-- ========== 询盘板块 ========== -->
+  <block wx:if="{{section === 'inquiry'}}">
+    <!-- 状态筛选 -->
+    <view class="tabs">
+      <view
+        class="tab {{filter === item.key ? 'tab-active' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        bindtap="onFilter"
+        data-key="{{item.key}}"
+      >{{item.label}}</view>
     </view>
 
-    <view class="empty" wx:if="{{!list.length && !loading}}">暂无{{filterLabel}}询盘</view>
-    <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">{{loading ? '加载中…' : '加载更多'}}</view>
-  </view>
+    <!-- 询盘列表 -->
+    <view class="list">
+      <view class="inq card" wx:for="{{list}}" wx:key="id">
+        <view class="inq-head">
+          <text class="inq-name">{{item.name}}</text>
+          <text class="inq-status s-{{item.status || 'new'}}">{{item.statusLabel}}</text>
+        </view>
+        <view class="inq-product" wx:if="{{item.productName}}">产品：{{item.productName}}</view>
+        <view class="inq-msg">{{item.message}}</view>
+        <view class="inq-meta">
+          <text class="inq-time">{{item.timeText}}</text>
+        </view>
+        <view class="inq-meta">
+          <text class="inq-phone" catchtap="callBack" data-phone="{{item.phone}}">📞 {{item.phone}} 回电</text>
+          <text class="inq-wechat" wx:if="{{item.wechat}}" catchtap="copyWechat" data-w="{{item.wechat}}">微信 {{item.wechat}} 复制</text>
+        </view>
+        <view class="inq-actions">
+          <view class="act" wx:if="{{(item.status || 'new') === 'new'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="followed">标为已跟进</view>
+          <view class="act" wx:if="{{(item.status || 'new') !== 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="closed">关闭</view>
+          <view class="act" wx:if="{{(item.status || 'new') === 'closed'}}" catchtap="setStatus" data-id="{{item.id}}" data-status="new">重新打开</view>
+        </view>
+      </view>
+
+      <view class="empty" wx:if="{{!list.length && !loading}}">暂无{{filterLabel}}询盘</view>
+      <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMoreInquiries">{{loading ? '加载中…' : '加载更多'}}</view>
+    </view>
+  </block>
+
+  <!-- ========== 订单板块 ========== -->
+  <block wx:else>
+    <!-- 状态筛选 -->
+    <view class="tabs">
+      <view
+        class="tab {{orderFilter === item.key ? 'tab-active' : ''}}"
+        wx:for="{{orderTabs}}"
+        wx:key="key"
+        bindtap="onOrderFilter"
+        data-key="{{item.key}}"
+      >{{item.label}}</view>
+    </view>
+
+    <!-- 订单列表 -->
+    <view class="list">
+      <view class="ord card" wx:for="{{orders}}" wx:key="id">
+        <view class="inq-head">
+          <text class="ord-no" catchtap="copyOrderNo" data-no="{{item.id}}">{{item.id}}</text>
+          <text class="ord-status {{item.statusCls}}">{{item.statusLabel}}</text>
+        </view>
+        <view class="ord-items">{{item.itemsText}}</view>
+        <view class="ord-buyer">收货：{{item.address.name}} {{item.address.phone}}</view>
+        <view class="ord-addr">{{item.address.region}} {{item.address.detail}}</view>
+        <view class="ord-track" wx:if="{{item.trackingNo}}" catchtap="copyTracking" data-no="{{item.trackingNo}}">📦 {{item.trackingNo}} · 点击复制</view>
+        <view class="ord-remark" wx:if="{{item.remark}}">留言：{{item.remark}}</view>
+        <view class="ord-foot">
+          <text class="inq-time">{{item.timeText}}</text>
+          <text class="ord-total">¥{{item.totalText}}</text>
+        </view>
+        <view class="inq-actions">
+          <view class="act" wx:if="{{item.status === 'paid'}}" catchtap="onShip" data-id="{{item.id}}">发货</view>
+          <view class="act" wx:if="{{item.address.phone}}" catchtap="callBuyer" data-phone="{{item.address.phone}}">联系买家</view>
+        </view>
+      </view>
+
+      <view class="empty" wx:if="{{!orders.length && !orderLoading}}">暂无{{orderFilterLabel}}订单</view>
+      <view class="load-more" wx:if="{{orderHasMore}}" bindtap="loadMoreOrders">{{orderLoading ? '加载中…' : '加载更多'}}</view>
+    </view>
+  </block>
 </view>

@@ -6,13 +6,22 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
  * 商家询盘管理云函数（以管理员权限读写 inquiries 集合，绕过集合权限规则，
  * 因此 inquiries 集合可以安全地保持「仅创建者可读写」，普通用户无法拉取他人询盘）。
  *
+ * 安全要点：入口先校验管理密码，避免任何用户绕过页面直接调云函数
+ * 拉取客户手机号等资料。
+ * ★ 修改密码时请同步修改：config/index.js 的 adminCode、
+ *   本文件的 ADMIN_CODE、adminOrders 的 ADMIN_CODE，改完重新部署。
+ *
  * 入参：
- *  - { action: 'list', status, skip, limit }  -> { code:0, list, total }
- *  - { action: 'updateStatus', id, status }   -> { code:0 }
+ *  - { action: 'list', adminCode, status, skip, limit } -> { code:0, list, total }
+ *  - { action: 'updateStatus', adminCode, id, status }  -> { code:0 }
  */
+const ADMIN_CODE = '888888'
 const ALLOWED_STATUS = ['new', 'followed', 'closed']
 
 exports.main = async (event) => {
+  if (!event.adminCode || event.adminCode !== ADMIN_CODE) {
+    return { code: 1, msg: '管理密码不正确' }
+  }
   const db = cloud.database()
   const { action } = event
 

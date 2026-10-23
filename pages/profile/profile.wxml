@@ -96,7 +96,7 @@
     </view>
     <view class="pf-row" hover-class="hover" bindtap="goAdmin">
       <text class="pf-row-icon">🔐</text>
-      <text class="pf-row-label">商家入口 · 询盘管理</text>
+      <text class="pf-row-label">商家入口 · 询盘/订单管理</text>
       <text class="pf-row-arrow">›</text>
     </view>
     <view wx:if="{{user}}" class="pf-row pf-logout" hover-class="hover" bindtap="logout">

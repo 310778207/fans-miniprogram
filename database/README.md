@@ -13,7 +13,7 @@
 | categories | 产品分类 | 所有用户可读，仅创建者可读写 |
 | products | 产品 | 所有用户可读，仅创建者可读写 |
 | inquiries | 询盘留言（submitInquiry 写入） | 仅管理端可读写 |
-| orders | 零售订单（createOrder 写入，含 _openid） | 仅创建者可读写 |
+| orders | 零售订单（createOrder 写入含 _openid；adminOrders 供商家管理/发货） | 仅创建者可读写 |
 
 > 购物车和收货地址簿保存在客户端本地存储，不需要建集合；
 > 订单创建时会把地址快照写进订单，所以地址簿放本地即可。
@@ -102,13 +102,15 @@
   "remark": "",
   "createdAt": "serverDate",
   "paidAt": "payCallback 写入",
-  "shippedAt": "商家发货时在控制台补充",
+  "trackingNo": "adminOrders 发货时写入（快递单号）",
+  "shippedAt": "adminOrders 发货时写入",
   "completedAt": "确认收货写入"
 }
 ```
 
-发货操作（云模式）：商家在云开发控制台把订单 `status` 改为 `shipped` 并填 `shippedAt`；
-后续可以做一个商家发货面板，需要时告诉我。
+发货操作：商家在小程序「我的 → 商家入口 → 订单」对待发货订单点「发货」并填快递单号，
+由 adminOrders 云函数以管理权限写入 `status: shipped` / `trackingNo` / `shippedAt`。
+orders 集合保持「仅创建者可读写」即可——买家只看自己的单，商家端读写都走云函数。
 
 ## 快速导入
 
