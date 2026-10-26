@@ -174,7 +174,8 @@ function normalizeInquiry(item) {
   let t = item.createdAt
   if (t && typeof t === 'object' && t.$date) t = t.$date
   const ts = t instanceof Date ? t.getTime() : typeof t === 'string' ? new Date(t).getTime() : Number(t) || 0
-  return Object.assign({}, item, { ts })
+  // 云端记录只有自动生成的 _id（submitInquiry 不写自定义 id），统一映射为 id 供操作按钮使用
+  return Object.assign({}, item, { id: item.id || item._id, ts })
 }
 
 async function listInquiries(opt) {
@@ -309,10 +310,13 @@ async function payOrder(id) {
 async function getOrders(opt) {
   opt = opt || {}
   if (cloudReady()) {
-    let q = db().collection('orders')
-    if (opt.status) q = q.where({ status: opt.status })
-    const res = await q.orderBy('createdAt', 'desc').limit(100).get()
-    return res.data
+    // 走云函数取本人订单：小程序端直查集合单次上限 20 条，云函数端可取 100
+    const res = await wx.cloud.callFunction({
+      name: 'orderAction',
+      data: { action: 'list', status: opt.status || '' }
+    })
+    if (res.result.code !== 0) throw new Error(res.result.msg || '订单读取失败')
+    return res.result.list
   }
   const all = (wx.getStorageSync(ORDER_KEY) || []).sort((a, b) => b.createdAt - a.createdAt)
   return opt.status ? all.filter((o) => o.status === opt.status) : all
@@ -358,7 +362,7 @@ async function confirmReceive(id) {
 
 /** 模拟发货（仅本地/演示模式，用于跑通「已发货→确认收货」流程） */
 function mockShip(id) {
-  if (cloudReady()) throw new Error('云模式下请在商户后台/控制台执行发货')
+  if (cloudReady()) throw new Error('云模式下请在「商家入口 → 订单」里发货')
   return updateLocalOrder(id, (o) => {
     if (o.status !== 'paid') throw new Error('当前状态不可发货')
     o.status = 'shipped'

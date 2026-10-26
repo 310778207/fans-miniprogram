@@ -18,8 +18,10 @@ module.exports = {
   useCloud: true,
   cloudEnv: 'cloud1-d3gz1cddr77f01eea',
 
-  // 商家询盘管理入口的访问密码（关于页底部「商家入口」进入），上线前改成自己的
-  adminCode: '888888',
+  // 商家管理入口的访问密码（品牌介绍页连点顶部品牌名 10 次唤出，界面上无可见入口）。
+  // ★ 改密码须三处同步：本文件 + adminInquiries / adminOrders 云函数的 ADMIN_CODE，
+  //   云函数改完要重新部署
+  adminCode: 'QYL1688',
 
   // 临时开关：true = 启动时自动调用 setupDB 云函数（建集合+导入演示数据）。
   // 数据库建好后（弹窗提示初始化完成）改回 false。
@@ -29,6 +31,8 @@ module.exports = {
   // 'mock'  = 模拟支付（开发/演示用，不真扣款，可跑通完整下单流程）；
   // 'cloud' = 微信云开发支付（需：开通云开发 + 绑定微信支付商户号，
   //           并在 cloudfunctions/payOrder/index.js 里填 SUB_MCH_ID）
+  // ★ 云模式下支付实际由 payOrder 云函数控制：切换模式时需同步改该函数的
+  //   MOCK_PAY（mock=true / cloud=false）并重新部署，否则支付链路对不上
   payment: {
     mode: 'mock'
   }

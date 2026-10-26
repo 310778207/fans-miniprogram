@@ -2,17 +2,23 @@ const cloud = require('wx-server-sdk')
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 
+/** ★ 模拟支付开关（开发/演示）：true = 不拉收银台，直接把订单置为已支付。 */
+const MOCK_PAY = true
+
 /**
  * ★★★ 上线前必填：微信支付商户号（服务商模式下的子商户号 subMchId）。
  * 在「微信支付商户平台」获取，并需在云开发控制台完成「云支付」绑定：
  * 云开发 → 设置 → 微信支付 → 添加商户号。
+ * 上线 = MOCK_PAY 改 false + 填好 SUB_MCH_ID，并把 config/index.js 的
+ * payment.mode 改成 'cloud'，然后重新部署本函数。
  */
 const SUB_MCH_ID = '请填入你的商户号'
 
 /**
  * 发起微信支付（云开发免鉴权支付通道）。
  * 入参：{ id: 订单号 }
- * 返回：{ code: 0, payment } 其中 payment 直接传给 wx.requestPayment
+ * 返回：{ code: 0, payment } 其中 payment 直接传给 wx.requestPayment；
+ *       模拟支付（MOCK_PAY）时返回 { code: 0, payment: null }，前端直接视为已支付
  */
 exports.main = async (event) => {
   const { id } = event
@@ -26,6 +32,15 @@ exports.main = async (event) => {
   const order = orderRes.data[0]
   if (!order) return { code: 1, msg: '订单不存在' }
   if (order.status !== 'pending_payment') return { code: 1, msg: '订单状态不支持支付' }
+
+  // 模拟支付：where 同时限定订单号+本人+待付款，天然幂等，避免并发重复置为已支付
+  if (MOCK_PAY) {
+    const upd = await db.collection('orders')
+      .where({ id, _openid: openid, status: 'pending_payment' })
+      .update({ data: { status: 'paid', paidAt: db.serverDate() } })
+    if (!upd.stats.updated) return { code: 1, msg: '订单状态不支持支付' }
+    return { code: 0, payment: null }
+  }
 
   const totalFee = Math.round(order.totalAmount * 100)
   if (totalFee <= 0) return { code: 1, msg: '订单金额异常' }

@@ -44,13 +44,11 @@ Page({
     canCancel: false,
     canReceive: false,
     canMockShip: false,
-    paying: false,
-    isMockPay: true
+    paying: false
   },
 
   onLoad(options) {
     this.orderId = options.id
-    this.setData({ isMockPay: pay.isMock() })
   },
 
   onShow() {
@@ -79,8 +77,8 @@ Page({
       canPay: status === 'pending_payment',
       canCancel: status === 'pending_payment',
       canReceive: status === 'shipped',
-      // 演示模式提供「模拟发货」，跑通已发货→确认收货
-      canMockShip: this.data.isMockPay && status === 'paid'
+      // 本地演示模式提供「模拟发货」；云模式（含模拟支付）由商家入口发货
+      canMockShip: !api.cloudReady() && status === 'paid'
     })
   },
 

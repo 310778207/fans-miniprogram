@@ -17,7 +17,7 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
  *  - { action: 'ship', adminCode, id, trackingNo }      -> { code:0 }
  *    「待发货」订单 → 「已发货」，trackingNo 为快递单号（≤64 字符，可空）
  */
-const ADMIN_CODE = '888888'
+const ADMIN_CODE = 'QYL1688'
 
 exports.main = async (event) => {
   if (!event.adminCode || event.adminCode !== ADMIN_CODE) {

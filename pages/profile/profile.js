@@ -140,10 +140,6 @@ Page({
     wx.navigateTo({ url: '/pages/about/about' })
   },
 
-  goAdmin() {
-    wx.navigateTo({ url: '/pages/admin/admin' })
-  },
-
   callPhone() {
     wx.makePhoneCall({ phoneNumber: config.phone })
   },

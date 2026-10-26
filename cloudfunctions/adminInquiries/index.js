@@ -15,7 +15,7 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
  *  - { action: 'list', adminCode, status, skip, limit } -> { code:0, list, total }
  *  - { action: 'updateStatus', adminCode, id, status }  -> { code:0 }
  */
-const ADMIN_CODE = '888888'
+const ADMIN_CODE = 'QYL1688'
 const ALLOWED_STATUS = ['new', 'followed', 'closed']
 
 exports.main = async (event) => {
